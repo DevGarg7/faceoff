@@ -1,0 +1,80 @@
+type VoteTally = 
+ record {
+   count: nat;
+   faceNumber: nat;
+   percentage: float64;
+ };
+type UserId = principal;
+type Timestamp = int;
+type ProfilePublic = 
+ record {
+   createdAt: Timestamp;
+   id: UserId;
+   pollCount: nat;
+   username: text;
+ };
+type PollSummary = 
+ record {
+   caption: opt text;
+   category: PollCategory;
+   expiresAt: Timestamp;
+   id: PollId;
+   leadingFace: opt nat;
+   photoUrl: text;
+   totalVotes: nat;
+ };
+type PollPublic = 
+ record {
+   caption: opt text;
+   category: PollCategory;
+   createdAt: Timestamp;
+   creator: UserId;
+   expiresAt: Timestamp;
+   faceMarkers: vec FaceMarker;
+   id: PollId;
+   isAnonymous: bool;
+   photoUrl: text;
+   totalVotes: nat;
+   votes: vec VoteTally;
+ };
+type PollId = text;
+type PollCategory = 
+ variant {
+   bestSmile;
+   bestStyle;
+   mostAttractive;
+   mostCharming;
+   mostConfident;
+   mostHandsome;
+   mostPhotogenic;
+ };
+type FaceMarker = 
+ record {
+   faceNumber: nat;
+   xPercent: float64;
+   yPercent: float64;
+ };
+service : {
+  castVote: (pollId: PollId, faceNumber: nat) ->
+   (variant {
+      err: text;
+      ok: vec VoteTally;
+    });
+  createPoll: (photoUrl: text, faceMarkers: vec FaceMarker, category:
+   PollCategory, durationHours: nat, caption: opt text, isAnonymous: 
+   bool) -> (variant {
+               err: text;
+               ok: PollPublic;
+             });
+  createProfile: (username: text) -> (variant {
+                                        err: text;
+                                        ok: ProfilePublic;
+                                      });
+  getMyPolls: () -> (vec PollSummary) query;
+  getMyProfile: () -> (opt ProfilePublic) query;
+  getPoll: (pollId: PollId) -> (opt PollPublic) query;
+  getProfile: (userId: UserId) -> (opt ProfilePublic) query;
+  getPublicFeed: (page: nat) -> (vec PollSummary) query;
+  getResults: (pollId: PollId) -> (opt vec VoteTally) query;
+  hasVoted: (pollId: PollId) -> (bool) query;
+}

@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Space Grotesk";
+    --font-body: "Plus Jakarta Sans";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.625rem;
+
+    --background: 0.14 0.01 280;
+    --foreground: 0.95 0.01 280;
+    --card: 0.18 0.015 280;
+    --card-foreground: 0.95 0.01 280;
+    --popover: 0.2 0.02 280;
+    --popover-foreground: 0.95 0.01 280;
+
+    --primary: 0.68 0.28 310;
+    --primary-foreground: 0.14 0.01 310;
+
+    --secondary: 0.25 0.03 280;
+    --secondary-foreground: 0.85 0.01 280;
+    --muted: 0.25 0.03 280;
+    --muted-foreground: 0.55 0.015 280;
+
+    --accent: 0.7 0.26 200;
+    --accent-foreground: 0.14 0.01 200;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.3 0.025 280;
+    --input: 0.3 0.025 280;
+    --ring: 0.68 0.28 310;
+
+    --chart-1: 0.68 0.28 310;
+    --chart-2: 0.7 0.26 200;
+    --chart-3: 0.65 0.22 40;
+    --chart-4: 0.73 0.24 170;
+    --chart-5: 0.62 0.25 280;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.35 0 0;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.95 0 0;
+    --sidebar-accent-foreground: 0.25 0 0;
+    --sidebar-border: 0.9 0 0;
+    --sidebar-ring: 0.35 0 0;
+  }
+
+  .dark {
+    --background: 0.14 0.01 280;
+    --foreground: 0.95 0.01 280;
+    --card: 0.18 0.015 280;
+    --card-foreground: 0.95 0.01 280;
+    --popover: 0.2 0.02 280;
+    --popover-foreground: 0.95 0.01 280;
+
+    --primary: 0.68 0.28 310;
+    --primary-foreground: 0.14 0.01 310;
+
+    --secondary: 0.25 0.03 280;
+    --secondary-foreground: 0.85 0.01 280;
+    --muted: 0.25 0.03 280;
+    --muted-foreground: 0.55 0.015 280;
+
+    --accent: 0.7 0.26 200;
+    --accent-foreground: 0.14 0.01 200;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.95 0.01 25;
+
+    --border: 0.3 0.025 280;
+    --input: 0.3 0.025 280;
+    --ring: 0.68 0.28 310;
+
+    --chart-1: 0.68 0.28 310;
+    --chart-2: 0.7 0.26 200;
+    --chart-3: 0.65 0.22 40;
+    --chart-4: 0.73 0.24 170;
+    --chart-5: 0.62 0.25 280;
+
+    --sidebar: 0.18 0 0;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.8 0 0;
+    --sidebar-primary-foreground: 0.145 0 0;
+    --sidebar-accent: 0.22 0 0;
+    --sidebar-accent-foreground: 0.85 0 0;
+    --sidebar-border: 0.28 0 0;
+    --sidebar-ring: 0.8 0 0;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  @font-face {
+    font-family: "Space Grotesk";
+    src: url("/assets/fonts/SpaceGrotesk.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+    font-display: swap;
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulseScale {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .slide-up {
+    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pulse-scale {
+    animation: pulseScale 0.6s ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse-scale,
+    .pulse-scale {
+      animation: none;
+    }
+  }
+
+  .vote-badge {
+    @apply inline-flex items-center justify-center w-12 h-12 rounded-full font-display font-bold text-lg bg-primary text-primary-foreground ring-2 ring-accent;
+  }
+
+  .vote-button {
+    @apply px-6 py-3 rounded-lg font-body font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-smooth;
+  }
+
+  .poll-card {
+    @apply bg-card border border-border rounded-2xl shadow-lg overflow-hidden;
+  }
+
+  .face-number {
+    @apply absolute w-14 h-14 rounded-full font-display font-bold text-xl flex items-center justify-center bg-primary text-primary-foreground shadow-lg;
+  }
+}

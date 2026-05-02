@@ -1,0 +1,22 @@
+{
+  "overview": "Group photo voting app where creators upload photos of up to 4 people, and the public votes on who wins each poll category. Features an Instagram reels-style swipe feed, live vote results, and a creator dashboard.",
+  "features": [
+    "Group photo upload with manual face numbering (1-4)",
+    "Poll creation with categories like Most Handsome, Best Style, Most Photogenic",
+    "Instagram-style vertical swipe voting feed",
+    "Live vote results with percentages and rankings",
+    "Creator dashboard showing poll stats and winners",
+    "One vote per poll per user enforcement",
+    "Internet Identity authentication"
+  ],
+  "category": "social",
+  "tags": [
+    "voting",
+    "social",
+    "photos",
+    "polls",
+    "ranking",
+    "fun"
+  ],
+  "last_updated": "2026-05-02T07:30:52.745Z"
+}
